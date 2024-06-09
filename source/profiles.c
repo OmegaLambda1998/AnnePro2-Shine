@@ -171,11 +171,17 @@ void animatedWave(led_t *currentKeyLedColors) {
 
 uint8_t animatedPressedBuf[NUM_ROW * NUM_COLUMN] = {0};
 
+// After a button is pressed, slowly change the hue and value
+// animatedPressedBuf starts at 100 and goes down to 0
+// We want value to go from 255 to 0 in the same time, so we scale the value by aPB / 100
+// Every tick, aPG is reduced by fadeSpeed, until the remaining aPB is < fadeSpeed
+// At that point the LED is turned off.
 void reactiveFade(led_t *ledColors) {
+  int fadeSpeed = 4;
   for (int i = 0; i < NUM_ROW * NUM_COLUMN; i++) {
-    if (animatedPressedBuf[i] > 5) {
-      animatedPressedBuf[i] -= 5;
-      hsv2rgb(100 - animatedPressedBuf[i], 255, 225, &ledColors[i]);
+    if (animatedPressedBuf[i] > fadeSpeed) {
+      animatedPressedBuf[i] -= fadeSpeed;
+      hsv2rgb(100 - animatedPressedBuf[i], 255, 255 * animatedPressedBuf[i] / 100.0, &ledColors[i]);
     } else if (animatedPressedBuf[i] > 0) {
       ledColors[i].p.blue = 0;
       ledColors[i].p.red = 0;
