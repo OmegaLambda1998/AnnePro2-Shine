@@ -1,3 +1,22 @@
+Fork of https://github.com/OpenAnnePro/AnnePro2-Shine containing quality of life changes for my own personal system
+
+# Changes from Upstream:
+
+## [profiles.c](source/profiles.c)
+
+Modified `animatedPressedBuf` to slowly fade whilst changing colours
+
+## [profiles.h](source/profiles.h)
+
+Minor formatting changes
+
+## [settings.c](source/settings.c)
+
+Organised and commented all profiles
+
+
+# Original Readme
+
 # Anne Pro 2 Shine!
 
 This is the custom LED firmware that goes along with the custom
